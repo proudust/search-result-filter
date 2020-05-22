@@ -1,0 +1,10 @@
+{
+  "name": "search-result-filter",
+  "version": "0.1.0",
+  "description": "Exclude certain sites from the search results.",
+  "main": "src/index.ts",
+  "repository": "https://github.com/proudust/search-result-filter",
+  "author": "Proudust <proudust@gmail.com>",
+  "license": "MIT",
+  "private": true
+}
