@@ -1,0 +1,38 @@
+name: Build
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Use npm cache
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-${{ env.cache-name }}-
+            ${{ runner.os }}-npm-
+            ${{ runner.os }}-
+
+      - name: Setup Node.js 10
+        uses: actions/setup-node@v1
+        with:
+          node-version: "10.x"
+
+      - name: Restore node modules
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint:ci
+
+      - name: Test
+        run: npm run test:ci
+
+      - name: Build
+        run: npm run build
